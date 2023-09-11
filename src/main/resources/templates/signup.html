@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.com">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>SignUp page</title>
+        <link rel="stylesheet" type="text/css" media="all"
+              href="../../css/style.css" th:href="@{/css/style.css}" />
+    </head>
+
+    <body>
+
+        <div class = "center">
+        <h1>Register</h1>
+
+        <form method = "post" th:action="create-user">
+                  <div class="txt_field">
+                      <input type="text" name="firstName" required>
+                    <span></span>
+                    <label>First Name</label>
+                </div>
+                <div class="txt_field">
+                    <input type="text" name="lastName" required>
+                    <span></span>
+                    <label>Last Name</label>
+                  
+                </div>
+                <div class="txt_field">
+                    <input type="text" name="email" required>
+                    <span></span>
+                    <label>Email</label>
+                </div>
+
+
+                <div class="txt_field">
+                    <input type ="password" name="password" required>
+                    <span></span>
+                    <label>password</label>
+                </div>
+
+                <div class="txt_field">
+                    <input type ="password" name ="confirmPass" required>
+                    <span></span>
+                    <label>Confirm password</label>
+                </div>
+
+
+                <div class="check">
+                    <label> <input type="checkbox" name="terms"> 
+                        I agree to terms and conditions
+                    </label>
+                </div>
+
+
+                <input type="submit" value="Register">
+                <div class="login_link">
+                    Already Have an Account?<a th:href="login.html">Login</a>
+
+                </div>
+
+            </form>
+        </div>
+
+
+    </body>
+
+    </html>
