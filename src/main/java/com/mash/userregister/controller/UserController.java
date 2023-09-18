@@ -6,8 +6,11 @@ import com.mash.userregister.service.UserService;
 import com.mash.userregister.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.converter.json.GsonBuilderUtils;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 public class UserController {
@@ -19,46 +22,38 @@ public class UserController {
     private UserService userService;
     @Autowired
     private UserRepository userRepository;
-@GetMapping("/")
-public String home(){
-    return "index";
 
-}
-@GetMapping("/register")
-public String register(){
+    @GetMapping("/")
+    public String home() {
+        return "index";
 
-    return "signup";
-}
+    }
+
+    @GetMapping("/register")
+    public String register() {
+
+        return "signup";
+    }
 
     @PostMapping("/create-user")
+    @CrossOrigin(origins = "http://localhost:4200")
     public User createUser(@RequestBody User user) {
         User newUser;
         String email = user.getEmail();
         if (userRepository.findByEmail(email).isPresent()) {
-         throw new IllegalStateException("user with " + email + " exsists");
-        }
-        else {
-               newUser = userService.createUser(user);
+            throw new IllegalStateException("user with " + email + " exsists");
+        } else {
+            newUser = userService.createUser(user);
         }
         return newUser;
     }
+
     @PostMapping("/login")
     @CrossOrigin(origins = "http://localhost:4200")
-    public User login(@RequestBody User user){
-
-        User validUser = null;
-        String email = user.getEmail();
-        String password =user.getPassword();
-        if (email != null && password != null) {
-            validUser = userService.findByEmailAndPassword(email,password);
-        }
-        if(validUser == null){
-
-            throw new IllegalStateException("Bad Credentials!!");
-        }
+    public User login(@RequestBody User user) {
+    User validUser ;
+      userService.authenticateUser(user);
+      validUser = userRepository.findByEmailAndPassword(user.getEmail() , user.getPassword());
         return validUser;
     }
-
-
-
 }

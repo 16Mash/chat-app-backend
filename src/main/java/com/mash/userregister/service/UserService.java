@@ -7,4 +7,6 @@ public interface UserService {
     public User createUser(User user);
     public User findByEmailAndPassword(String email,String password);
 
+    public String authenticateUser(User user);
+
 }
