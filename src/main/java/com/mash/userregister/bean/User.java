@@ -21,13 +21,14 @@ public class User {
     private String lastName;
     private String email;
     private String password;
+    private String contact;
 
-
-    public User(String firstName, String lastName, String email, String password) {
+    public User(String firstName, String lastName, String email,String contact, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+        this.contact = contact;
     }
 
 
@@ -75,6 +76,13 @@ public class User {
         this.password = password;
     }
 
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
 
     @Override
     public String toString() {

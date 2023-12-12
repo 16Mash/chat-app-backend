@@ -12,6 +12,7 @@ import java.util.Optional;
 @Service
 public class UserServiceImpl implements UserService {
 
+
     @Autowired
     private final UserRepository userRepository;
 
@@ -53,6 +54,18 @@ public class UserServiceImpl implements UserService {
 
 throw new IllegalStateException("We do not have that email in our systems ");
 
+    }
+
+    @Override
+    public User addFriend(User user) {
+
+
+
+
+
+
+
+        return null;
     }
 
 }

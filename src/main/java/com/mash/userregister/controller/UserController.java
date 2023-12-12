@@ -23,26 +23,23 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping("/")
-    public String home() {
-        return "index";
 
-    }
-
-    @GetMapping("/register")
-    public String register() {
-
-        return "signup";
-    }
 
     @PostMapping("/create-user")
     @CrossOrigin(origins = "http://localhost:4200")
     public User createUser(@RequestBody User user) {
         User newUser;
         String email = user.getEmail();
+        String contact =user.getContact();
+
         if (userRepository.findByEmail(email).isPresent()) {
             throw new IllegalStateException("user with " + email + " exsists");
-        } else {
+        }
+        if(userRepository.findByContact(contact).isPresent()){
+            throw new IllegalStateException("user with " + contact + " exsists");
+        }
+
+        else {
             newUser = userService.createUser(user);
         }
         return newUser;
